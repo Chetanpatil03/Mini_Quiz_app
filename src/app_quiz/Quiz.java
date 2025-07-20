@@ -19,55 +19,55 @@ public class Quiz extends JFrame implements ActionListener {
     public static int score = 0;
 
 
-    JLabel qnoLbl,questionsLbl;
-    JRadioButton opt1,opt2,opt3,opt4;
+    JLabel qnoLbl, questionsLbl;
+    JRadioButton opt1, opt2, opt3, opt4;
     ButtonGroup group;
-    JButton nextBtn,submitBtn,helpBtn;
+    JButton nextBtn, submitBtn, helpBtn;
 
-    Quiz(String name){
+    Quiz(String name) {
         super("Quiz");
         this.name = name;
 
         ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("app_quiz/icons/quiz.png"));
-        Image image = icon.getImage().getScaledInstance(1440,292,Image.SCALE_DEFAULT);
+        Image image = icon.getImage().getScaledInstance(1440, 292, Image.SCALE_DEFAULT);
         JLabel lblImg = new JLabel(new ImageIcon(image));
-        lblImg.setBounds(0,0,1440,292);
+        lblImg.setBounds(0, 0, 1440, 292);
         add(lblImg);
 
         qnoLbl = new JLabel("2.");
-        qnoLbl.setBounds(100,350,500,30);
-        qnoLbl.setFont(new Font("Tahoma",Font.PLAIN,24));
+        qnoLbl.setBounds(100, 350, 500, 30);
+        qnoLbl.setFont(new Font("Tahoma", Font.PLAIN, 24));
         add(qnoLbl);
 
         questionsLbl = new JLabel("Question");
-        questionsLbl.setBounds(150,350,800,30);
-        questionsLbl.setFont(new Font("Tahoma",Font.PLAIN,24));
+        questionsLbl.setBounds(150, 350, 800, 30);
+        questionsLbl.setFont(new Font("Tahoma", Font.PLAIN, 24));
         add(questionsLbl);
 
         addQuestions();
 
         opt1 = new JRadioButton();
-        opt1.setBounds(170,400,700,30);
+        opt1.setBounds(170, 400, 700, 30);
         opt1.setBackground(Color.WHITE);
-        opt1.setFont(new Font("Dailog",Font.PLAIN,20));
+        opt1.setFont(new Font("Dailog", Font.PLAIN, 20));
         add(opt1);
 
         opt2 = new JRadioButton();
-        opt2.setBounds(170,440,700,30);
+        opt2.setBounds(170, 440, 700, 30);
         opt2.setBackground(Color.WHITE);
-        opt2.setFont(new Font("Dailog",Font.PLAIN,20));
+        opt2.setFont(new Font("Dailog", Font.PLAIN, 20));
         add(opt2);
 
         opt3 = new JRadioButton();
-        opt3.setBounds(170,480,700,30);
+        opt3.setBounds(170, 480, 700, 30);
         opt3.setBackground(Color.WHITE);
-        opt3.setFont(new Font("Dailog",Font.PLAIN,20));
+        opt3.setFont(new Font("Dailog", Font.PLAIN, 20));
         add(opt3);
 
         opt4 = new JRadioButton();
-        opt4.setBounds(170,520,700,30);
+        opt4.setBounds(170, 520, 700, 30);
         opt4.setBackground(Color.WHITE);
-        opt4.setFont(new Font("Dailog",Font.PLAIN,20));
+        opt4.setFont(new Font("Dailog", Font.PLAIN, 20));
         add(opt4);
 
         group = new ButtonGroup();
@@ -77,22 +77,22 @@ public class Quiz extends JFrame implements ActionListener {
         group.add(opt4);
 
         nextBtn = new JButton("Next");
-        nextBtn.setBounds(550,570,200,30);
-        nextBtn.setBackground(new Color(22,99,54));
+        nextBtn.setBounds(550, 570, 200, 30);
+        nextBtn.setBackground(new Color(22, 99, 54));
         nextBtn.setForeground(Color.WHITE);
         add(nextBtn);
         nextBtn.addActionListener(this);
 
         helpBtn = new JButton("Help");
-        helpBtn.setBounds(780,570,200,30);
-        helpBtn.setBackground(new Color(22,99,54));
+        helpBtn.setBounds(780, 570, 200, 30);
+        helpBtn.setBackground(new Color(22, 99, 54));
         helpBtn.setForeground(Color.black);
         add(helpBtn);
         helpBtn.addActionListener(this);
 
         submitBtn = new JButton("Submit");
-        submitBtn.setBounds(1000,570,200,30);
-        submitBtn.setBackground(new Color(225,215,0));
+        submitBtn.setBounds(1000, 570, 200, 30);
+        submitBtn.setBackground(new Color(225, 215, 0));
         submitBtn.setForeground(Color.WHITE);
         add(submitBtn);
         submitBtn.addActionListener(this);
@@ -100,20 +100,13 @@ public class Quiz extends JFrame implements ActionListener {
         start(count);
 
 
-
-
-
-
-
-
-
         getContentPane().setBackground(Color.WHITE);
-        setBounds(0,0,1440,850);
+        setBounds(0, 0, 1440, 850);
         setLayout(null);
         setVisible(true);
     }
 
-    public void addQuestions(){
+    public void addQuestions() {
         questions[0][0] = "Number of primitive data types in Java are.?";
         questions[0][1] = "6";
         questions[0][2] = "7";
@@ -188,7 +181,7 @@ public class Quiz extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == nextBtn){
+        if (e.getSource() == nextBtn) {
             repaint();
             opt1.setEnabled(true);
             opt2.setEnabled(true);
@@ -197,15 +190,14 @@ public class Quiz extends JFrame implements ActionListener {
 
             ans_given = 1;
 
-            if (group.getSelection() == null){
+            if (group.getSelection() == null) {
                 user_ans[count][0] = "";
-            }
-            else {
+            } else {
                 user_ans[count][0] = group.getSelection().getActionCommand();
 
             }
 
-            if (count == 8){
+            if (count == 8) {
                 nextBtn.setEnabled(false);
                 submitBtn.setEnabled(true);
             }
@@ -213,35 +205,33 @@ public class Quiz extends JFrame implements ActionListener {
             count++;
             start(count);
         } else if (e.getSource() == helpBtn) {
-            if (count ==2 || count == 4 || count == 6 || count == 8 || count == 9){
+            if (count == 2 || count == 4 || count == 6 || count == 8 || count == 9) {
                 opt2.setEnabled(false);
                 opt3.setEnabled(false);
-            }
-            else {
+            } else {
                 opt1.setEnabled(false);
                 opt4.setEnabled(false);
             }
 
             helpBtn.setEnabled(false);
-        } else if (e.getSource() == submitBtn){
+
+        } else if (e.getSource() == submitBtn) {
             ans_given = 1;
-            if (group.getSelection() == null){
+            if (group.getSelection() == null) {
                 user_ans[count][0] = "";
-            }
-            else {
+            } else {
                 user_ans[count][0] = group.getSelection().getActionCommand();
             }
 
-            for (int i = 0; i< user_ans.length;i++){
-                if (user_ans[i][0].equals(answers[i][1])){
-                    score +=10;
-                }
-                else {
+            for (int i = 0; i < user_ans.length; i++) {
+                if (user_ans[i][0].equals(answers[i][1])) {
+                    score += 10;
+                } else {
                     score += 0;
                 }
             }
 
-            new Score(name,score);
+            new Score(name, score);
             setVisible(false);
 
         }
@@ -313,7 +303,7 @@ public class Quiz extends JFrame implements ActionListener {
     }
 
 
-    public void start(int count){
+    public void start(int count) {
         qnoLbl.setText((count + 1) + ".  ");
         questionsLbl.setText(questions[count][0]);
 
