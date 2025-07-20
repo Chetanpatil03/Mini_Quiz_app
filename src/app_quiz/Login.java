@@ -72,6 +72,10 @@ public class Login extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == nextBtn){
 
+            String name = nameTxt.getText();
+
+            setVisible(false);
+            new Rules(name);
         }
         else if (e.getSource() == backBtn){
 //            setVisible(false);

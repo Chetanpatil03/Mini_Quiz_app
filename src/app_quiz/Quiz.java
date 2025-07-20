@@ -11,6 +11,8 @@ public class Quiz extends JFrame implements ActionListener {
     String[][] answers = new String[10][2];
     String[][] user_ans = new String[10][1];
 
+    String name;
+
     public static int timer = 15;
     public static int ans_given = 0;
     public static int count = 0;
@@ -22,8 +24,9 @@ public class Quiz extends JFrame implements ActionListener {
     ButtonGroup group;
     JButton nextBtn,submitBtn,helpBtn;
 
-    Quiz(){
+    Quiz(String name){
         super("Quiz");
+        this.name = name;
 
         ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("app_quiz/icons/quiz.png"));
         Image image = icon.getImage().getScaledInstance(1440,292,Image.SCALE_DEFAULT);
@@ -32,12 +35,12 @@ public class Quiz extends JFrame implements ActionListener {
         add(lblImg);
 
         qnoLbl = new JLabel("2.");
-        qnoLbl.setBounds(100,350,50,30);
+        qnoLbl.setBounds(100,350,500,30);
         qnoLbl.setFont(new Font("Tahoma",Font.PLAIN,24));
         add(qnoLbl);
 
         questionsLbl = new JLabel("Question");
-        questionsLbl.setBounds(150,350,50,30);
+        questionsLbl.setBounds(150,350,800,30);
         questionsLbl.setFont(new Font("Tahoma",Font.PLAIN,24));
         add(questionsLbl);
 
@@ -243,29 +246,29 @@ public class Quiz extends JFrame implements ActionListener {
         }
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         super.paint(g);
 
-        String time = "Time left - "+timer+ " seconds";
-        g.setColor(Color.red);
-        g.setFont(new Font("Tahoma",Font.BOLD,25));
-        if (timer > 0){
-            g.drawString(time,1100,500);
-        }
-        else {
-            g.drawString("Times up !!",1100,500);
+        String time = "Time left - " + timer + " seconds"; // 15
+        g.setColor(Color.RED);
+        g.setFont(new Font("Tahoma", Font.BOLD, 25));
+
+        if (timer > 0) {
+            g.drawString(time, 950, 400);
+        } else {
+            g.drawString("Times up!!", 950, 400);
         }
 
-        timer --;
+        timer--; // 14
 
         try {
             Thread.sleep(1000);
-        }
-        catch (Exception e){
+            repaint();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (ans_given == 1){
+        if (ans_given == 1) {
             ans_given = 0;
             timer = 15;
         } else if (timer < 0) {
@@ -275,45 +278,42 @@ public class Quiz extends JFrame implements ActionListener {
             opt3.setEnabled(true);
             opt4.setEnabled(true);
 
-            if (count == 8){
+            if (count == 8) {
                 nextBtn.setEnabled(false);
                 submitBtn.setEnabled(true);
             }
-            if(count == 9) {
-                if (group.getSelection() == null){
+            if (count == 9) { // submit button
+                if (group.getSelection() == null) {
                     user_ans[count][0] = "";
-                }
-                else {
+                } else {
                     user_ans[count][0] = group.getSelection().getActionCommand();
                 }
 
-                for (int i = 0;i<user_ans.length ; i++){
-                    if (user_ans[i][0].equals(answers[i][1])){
+                for (int i = 0; i < user_ans.length; i++) {
+                    if (user_ans[i][0].equals(answers[i][1])) {
                         score += 10;
-                    }
-                    else {
-                        score +=0;
+                    } else {
+                        score += 0;
                     }
                 }
-
                 setVisible(false);
-//                new Score(name,score);
-
-            }else {
-                if (group.getSelection() == null){
-                    user_ans[count][0]= "";
-                } else{
+                new Score(name, score);
+            } else { // next button
+                if (group.getSelection() == null) {
+                    user_ans[count][0] = "";
+                } else {
                     user_ans[count][0] = group.getSelection().getActionCommand();
                 }
-
-                count++;
+                count++; // 0 // 1
                 start(count);
             }
         }
+
     }
 
+
     public void start(int count){
-        qnoLbl.setText("" + (count + 1) + ".  ");
+        qnoLbl.setText((count + 1) + ".  ");
         questionsLbl.setText(questions[count][0]);
 
         opt1.setText(questions[count][1]);
@@ -332,6 +332,6 @@ public class Quiz extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Quiz();
+        new Quiz("User");
     }
 }
