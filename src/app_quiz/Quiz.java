@@ -241,6 +241,7 @@ public class Quiz extends JFrame implements ActionListener {
                 }
             }
 
+            new Score(name,score);
             setVisible(false);
 
         }
