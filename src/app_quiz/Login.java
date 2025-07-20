@@ -1,7 +1,6 @@
-package app_quize;
-import com.formdev.flatlaf.FlatDarkLaf;
+package app_quiz;
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLightLaf;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +19,7 @@ public class Login extends JFrame implements ActionListener {
 
 
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("app_quize/icons/login.png"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("app_quiz/icons/login.png"));
         Image i2 = i1.getImage().getScaledInstance(550,500,Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel lbl = new JLabel(i3);
@@ -43,8 +42,8 @@ public class Login extends JFrame implements ActionListener {
         add(name);
 
         nameTxt = new JTextField();
-        nameTxt.setBounds(80,200,300,25);
-        nameTxt.setFont(new Font("Times New Romen",Font.BOLD,15));
+        nameTxt.setBounds(80,200,300,30);
+        nameTxt.setFont(new Font("Times New Roman",Font.BOLD,15));
         add(nameTxt);
 
         nextBtn = new JButton("Next");
